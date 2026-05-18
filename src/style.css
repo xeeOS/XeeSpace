@@ -1,0 +1,518 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-color: #ffffff;
+  --text-main: #111111;
+  --text-muted: #888888;
+  --border-color: #eaeaea;
+  --nav-bg: #ffffff;
+  --nav-hover: #f5f5f5;
+  --accent: #000000;
+
+  --planet-bg: #020205;
+  --planet-text: #ffffff;
+  --planet-muted: rgba(255, 255, 255, 0.7);
+  --planet-accent: #9d7cff;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-main);
+  transition: background 1s ease, color 1s ease;
+}
+
+#canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+}
+
+#bg-glow {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 150vw;
+  height: 150vh;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, currentColor 0%, transparent 65%);
+  color: transparent;
+  transition: color 2s ease-in-out;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.ui-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.ui-layer>* {
+  pointer-events: auto;
+}
+
+body.theme-light #ui-dark {
+  opacity: 0;
+  visibility: hidden;
+}
+
+body.theme-dark {
+  background: var(--planet-bg);
+  color: var(--planet-text);
+}
+
+body.theme-dark #bg-glow {
+  color: #16102b;
+}
+
+body.theme-dark #ui-light {
+  opacity: 0;
+  visibility: hidden;
+}
+
+
+.logo-area {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+}
+
+.logo-area h1 {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.logo-area p {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  letter-spacing: 0.02em;
+}
+
+.sidebar-nav {
+  position: absolute;
+  top: 50%;
+  left: 32px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 180px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--nav-bg);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-item svg {
+  width: 18px;
+  height: 18px;
+}
+
+.nav-item:hover {
+  background: var(--nav-hover);
+}
+
+.nav-item.active {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+}
+
+/* ── Text Group Box ── */
+.nav-item-group {
+  background: var(--nav-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.nav-item-group.nav-item {
+  flex-direction: column;
+  align-items: stretch;
+  height: auto;
+  padding: 0;
+  width: 160px;
+  justify-content: flex-start;
+}
+
+.nav-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 10px 12px;
+  /* smaller, even left padding */
+  font-size: 14px;
+  font-weight: 500;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.nav-item-header svg {
+  width: 18px;
+  height: 18px;
+}
+
+.text-input {
+  width: 100%;
+  border: none;
+  padding: 8px 16px;
+  font-size: 12px;
+  outline: none;
+  background: transparent;
+  text-align: center;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.enter-planets {
+  position: absolute;
+  bottom: 80px;
+  left: 32px;
+  background: rgba(255, 255, 255, 0.6);
+  width: 160px;
+  justify-content: space-between;
+  color: #6b7280;
+  /* matches the muted grey of other buttons */
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.enter-planets:hover {
+  border-color: rgba(0, 0, 0, 0.8);
+  color: #000;
+  transform: translateX(4px);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.footer-credits {
+  position: absolute;
+  bottom: 32px;
+  left: 32px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+
+#btn-exit-planets {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  background: transparent;
+  color: var(--planet-muted);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#btn-exit-planets:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.planet-controls {
+  position: absolute;
+  top: 32px;
+  right: 32px;
+}
+
+#planet-button {
+  background: rgba(10, 15, 30, 0.6);
+  color: #ffffff;
+  padding: 10px 20px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  border: 1px solid var(--planet-accent);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+  position: relative;
+}
+
+#planet-button:hover,
+#planet-button.active {
+  background: rgba(20, 30, 60, 0.8);
+  box-shadow: 0 0 15px var(--planet-accent);
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: rgba(10, 15, 30, 0.85);
+  min-width: 160px;
+  border: 1px solid var(--planet-accent);
+  border-radius: 8px;
+  backdrop-filter: blur(8px);
+  overflow: hidden;
+}
+
+.dropdown-content a {
+  color: var(--planet-muted);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.2s ease;
+}
+
+.dropdown-content a:hover {
+  background-color: var(--planet-accent);
+  color: #000;
+  font-weight: 700;
+}
+
+#planet-button.active .dropdown-content {
+  display: block;
+}
+
+#hud-panel {
+  position: absolute;
+  bottom: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: 90%;
+  max-width: 800px;
+  text-transform: uppercase;
+}
+
+#hud-title {
+  font-size: 24px;
+  letter-spacing: 0.4em;
+  color: #ffffff;
+  font-weight: 700;
+  margin-bottom: 8px;
+  text-shadow: 0 0 15px var(--planet-accent);
+  height: 28px;
+}
+
+#hud-desc {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--planet-muted);
+  margin-bottom: 24px;
+  height: 16px;
+}
+
+#hud-specs {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--planet-muted);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.6s ease;
+}
+
+#hud-specs.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.spec-item span {
+  color: var(--planet-accent);
+  font-weight: 700;
+  text-shadow: 0 0 8px var(--planet-accent);
+}
+
+.sidebar-nav .nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 0.8rem;
+  letter-spacing: -0.02em;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 160px;
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar-nav .nav-item:hover {
+  border-color: rgba(0, 0, 0, 0.8);
+  /* ← darker border on hover */
+  color: #000;
+  transform: translateX(4px);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.sidebar-nav .nav-item.active {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+  transform: translateX(8px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar-nav .nav-item svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.3s ease;
+}
+
+.sidebar-nav .nav-item.active svg {
+  transform: scale(1.1);
+}
+
+
+.sidebar-nav .nav-item-group.nav-item {
+  align-items: stretch;
+  flex-direction: column;
+  width: 160px;
+  /* explicit width to match other buttons */
+  overflow: hidden;
+}
+
+/* Fix: stay white when active, don't go black like other buttons */
+.sidebar-nav .nav-item-group.nav-item.active {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.2);
+  color: #000;
+  transform: translateX(8px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar-nav .nav-item-group.nav-item.active .nav-item-header {
+  color: #000;
+}
+
+.footer-credits {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.footer-credits:hover {
+  color: var(--text-main);
+  text-decoration: underline;
+}
+
+.github-link {
+  display: flex;
+  align-items: center;
+  color: inherit;
+  /* follows the parent hover color */
+  transition: color 0.2s ease;
+}
+
+.github-link:hover {
+  text-decoration: none;
+  /* prevent double underline on the icon */
+}
+
+/* ── Planet Nav Sidebar ── */
+.planet-nav {
+  position: absolute;
+  top: 50%;
+  left: 32px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.planet-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 0.8rem;
+  letter-spacing: -0.02em;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 160px;
+  position: relative;
+  overflow: hidden;
+}
+
+.planet-nav-item svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.3s ease;
+}
+
+.planet-nav-item:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+  transform: translateX(4px);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.planet-nav-item.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  transform: translateX(8px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+.planet-nav-item.active svg {
+  transform: scale(1.1);
+}

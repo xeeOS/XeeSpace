@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>xeeSpace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+
+<body class="theme-light">
+
+  <div id="bg-glow"></div>
+  <canvas id="canvas"></canvas>
+
+  <main id="ui-light" class="ui-layer">
+    <header class="logo-area">
+      <h1><span style="font-weight: 300; opacity: 0.8;">xee</span><span style="font-weight: 700;">Space</span></h1>
+      <p>Volumetric Particle Engine.</p>
+    </header>
+
+    <nav class="sidebar-nav">
+      <button class="nav-item active" data-shape="sphere">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="9" />
+        </svg>
+        Sphere
+      </button>
+      <button class="nav-item" data-shape="cube">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path
+            d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+          <line x1="12" y1="22.08" x2="12" y2="12" />
+        </svg>
+        Cube
+      </button>
+      <button class="nav-item" data-shape="galaxy">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 3v18m9-9H3m15.364-6.364l-12.728 12.728m0-12.728l12.728 12.728" />
+        </svg>
+        Galaxy
+      </button>
+      <button class="nav-item" data-shape="dna">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 3c2 3 10 3 12 6s-10 6-12 9 10 3 12 6" />
+          <path d="M18 3c-2 3-10 3-12 6s10 6 12 9-10 3-12 6" />
+          <line x1="9.5" y1="7.5" x2="14.5" y2="7.5" />
+          <line x1="6.5" y1="12" x2="17.5" y2="12" />
+          <line x1="9.5" y1="16.5" x2="14.5" y2="16.5" />
+        </svg>
+        DNA
+      </button>
+      <button class="nav-item" data-shape="torus">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="9" />
+          <circle cx="12" cy="12" r="4" />
+        </svg>
+        Torus
+      </button>
+      <button class="nav-item" data-shape="heart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path
+            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+        </svg>
+        Heart
+      </button>
+
+      <div class="nav-item-group nav-item">
+        <div class="nav-item-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="4" y1="7" x2="20" y2="7" />
+            <line x1="4" y1="12" x2="20" y2="12" />
+            <line x1="4" y1="17" x2="20" y2="17" />
+          </svg>
+          Text
+        </div>
+        <input type="text" placeholder="XEE" class="text-input" />
+      </div>
+    </nav>
+
+    <button id="btn-enter-planets" class="nav-item enter-planets">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="5" />
+        <path
+          d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41" />
+      </svg>
+      Planets Mode
+    </button>
+
+    <div class="footer-credits">
+      <a href="https://github.com/xeeOS" target="_blank" rel="noopener" class="github-link">
+        Made by xeeOS
+        <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor">
+          <path
+            d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
+        </svg>
+      </a>
+    </div>
+  </main>
+
+
+  <main id="ui-dark" class="ui-layer">
+
+    <button id="btn-exit-planets">← Back to Sandbox</button>
+
+    <nav class="planet-nav">
+      <button class="planet-nav-item active" data-target="mercury">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="9" />
+        </svg>
+        Mercury
+      </button>
+      <button class="planet-nav-item" data-target="venus">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 3c2 4 2 14 0 18" />
+        </svg>
+        Venus
+      </button>
+      <button class="planet-nav-item" data-target="earth">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M3 12h18M12 3c-4 4-4 14 0 18M12 3c4 4 4 14 0 18" />
+        </svg>
+        Earth
+      </button>
+      <button class="planet-nav-item" data-target="mars">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="13" r="8" />
+          <path d="M19 5l-4 4m4-4h-4m4 0v4" />
+        </svg>
+        Mars
+      </button>
+      <button class="planet-nav-item" data-target="jupiter">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M3 9h18M3 15h18" />
+        </svg>
+        Jupiter
+      </button>
+      <button class="planet-nav-item" data-target="saturn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="7" />
+          <ellipse cx="12" cy="12" rx="11" ry="4" />
+        </svg>
+        Saturn
+      </button>
+      <button class="planet-nav-item" data-target="uranus">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="7" />
+          <line x1="12" y1="1" x2="12" y2="5" />
+          <circle cx="12" cy="2" r="1" fill="currentColor" />
+        </svg>
+        Uranus
+      </button>
+      <button class="planet-nav-item" data-target="neptune">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 3v18M7 7l10 10M17 7L7 17" />
+        </svg>
+        Neptune
+      </button>
+    </nav>
+
+    <div id="hud-panel">
+      <div id="hud-title"></div>
+      <div id="hud-desc"></div>
+      <div id="hud-specs"></div>
+    </div>
+
+  </main>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>
