@@ -154,7 +154,7 @@ body.theme-dark #ui-light {
   border-color: var(--accent);
 }
 
-/* ── Text Group Box ── */
+
 .nav-item-group {
   background: var(--nav-bg);
   border: 1px solid var(--border-color);
@@ -177,7 +177,6 @@ body.theme-dark #ui-light {
   justify-content: flex-start;
   gap: 12px;
   padding: 10px 12px;
-  /* smaller, even left padding */
   font-size: 14px;
   font-weight: 500;
   border-bottom: 1px solid var(--border-color);
@@ -208,7 +207,6 @@ body.theme-dark #ui-light {
   width: 160px;
   justify-content: space-between;
   color: #6b7280;
-  /* matches the muted grey of other buttons */
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
@@ -386,7 +384,6 @@ body.theme-dark #ui-light {
 
 .sidebar-nav .nav-item:hover {
   border-color: rgba(0, 0, 0, 0.8);
-  /* ← darker border on hover */
   color: #000;
   transform: translateX(4px);
   background: rgba(255, 255, 255, 0.9);
@@ -415,11 +412,10 @@ body.theme-dark #ui-light {
   align-items: stretch;
   flex-direction: column;
   width: 160px;
-  /* explicit width to match other buttons */
   overflow: hidden;
 }
 
-/* Fix: stay white when active, don't go black like other buttons */
+/* Fix: stay white when active */
 .sidebar-nav .nav-item-group.nav-item.active {
   background: rgba(255, 255, 255, 0.9);
   border-color: rgba(0, 0, 0, 0.2);
@@ -459,7 +455,7 @@ body.theme-dark #ui-light {
   /* prevent double underline on the icon */
 }
 
-/* ── Planet Nav Sidebar ── */
+/* Planet Nav Sidebar */
 .planet-nav {
   position: absolute;
   top: 50%;
