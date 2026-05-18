@@ -22,7 +22,6 @@ let lastTouchDist: number = 0
 
 export function init(): void {
   window.addEventListener('mousedown', (e: MouseEvent) => {
-    // Ignore clicks on the planet button / dropdown
     if (e.target instanceof Element && e.target.closest('#planet-button')) return
     state.isDrag = true
     lastMX = e.clientX
@@ -38,17 +37,15 @@ export function init(): void {
       const dx = e.clientX - lastMX
       const dy = e.clientY - lastMY
       
-      // FIX: Changed -= to += so it rotates with the mouse instead of away from it
+      // FIX: Changed -= to +=
       state.rotY  += dx * 0.005
       state.rotX  += dy * 0.005
       
-      // Velocity matches the rotation direction for correct inertia
       state.vRotY  = dx * 0.005
       state.vRotX  = dy * 0.005
       
       lastMX = e.clientX
       lastMY = e.clientY
-      // Clear mouse so repulsion doesn't fire while dragging
       state.mouse.set(-99, -99)
       return
     }
@@ -68,7 +65,7 @@ export function init(): void {
     state.targetZoom = Math.max(3.5, Math.min(15, state.targetZoom + e.deltaY * 0.006))
   }, { passive: false })
 
-  // ── Touch ──
+  //Touch
   window.addEventListener('touchstart', (e: TouchEvent) => {
     if (e.touches.length === 1) {
       state.isDrag = true
@@ -89,11 +86,9 @@ export function init(): void {
       const dx = e.touches[0].clientX - lastMX
       const dy = e.touches[0].clientY - lastMY
       
-      // FIX: Changed -= to += here as well
       state.rotY += dx * 0.005
       state.rotX += dy * 0.005
       
-      // FIX: Added velocity so touch dragging has smooth inertia too!
       state.vRotY = dx * 0.005
       state.vRotX = dy * 0.005
       
@@ -126,7 +121,7 @@ export function tick(): void {
     state.vRotX *= 0.94
     state.vRotY *= 0.94
     state.rotX  += state.vRotX
-    state.rotY  += state.vRotY + 0.0018   // gentle auto-spin
+    state.rotY  += state.vRotY + 0.0018   // auto-spin
   }
 
   state.zoom += (state.targetZoom - state.zoom) * 0.07
