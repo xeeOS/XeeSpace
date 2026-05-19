@@ -1,7 +1,7 @@
 # xeeSpace
 
 <p align="center">
-  <img src="scripts/logo.png" alt="xeeSpace Logo" width="400" />
+  <img src="./scripts/logo.png" alt="xeeSpace Logo" width="400" />
 </p>
 
 <p align="center">
@@ -25,7 +25,7 @@ A web application that transforms mathematical geometries into fluid, particle a
 ## Screenshots
 
 <p align="center">
-  <img src="scripts/screenshot1.png" alt="xeeSpace Main Interface" width="800" />
+  <img src="./scripts/screenshot1.png" alt="xeeSpace Main Interface" width="800" />
 </p>
 <p align="center">
   <em>Main interface showing the volumetric particle system.</em>
@@ -34,7 +34,7 @@ A web application that transforms mathematical geometries into fluid, particle a
 <br />
 
 <p align="center">
-  <img src="scripts/screenshot2.png" alt="xeeSpace Planets Mode" width="800" />
+  <img src="./scripts/screenshot2.png" alt="xeeSpace Planets Mode" width="800" />
 </p>
 <p align="center">
   <em>Interactive Planets Mode featuring the solar system simulation.</em>
