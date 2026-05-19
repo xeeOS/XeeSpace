@@ -55,5 +55,4 @@ export function animateFact(planetKey: string): void {
   })
 }
 
-// Keep this so main.ts import doesn't break — it's just unused now
 export function onPlanetSelect(fn: (planetKey: string) => void): void { }

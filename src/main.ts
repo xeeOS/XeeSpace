@@ -5,7 +5,6 @@ import { init as initControls, tick as tickControls, state } from './sphere/cont
 //import { renderer, scene, camera, group, morphTo, tick as tickParticles } from './sphere/particles'
 import { animateFact, onPlanetSelect } from './sphere/ui'
 
-// — Bootstrap ————————————————————————————————————————————————
 initControls()
 
 // 1. Initial State (Light Theme / B&W / Sphere)
@@ -15,7 +14,6 @@ if (bgGlow) bgGlow.style.color = 'transparent'
 
 morphTo('sphere') // Boot cleanly into monochrome shape
 
-// — UI Wiring (Sandbox Mode) —————————————————————————————————
 const shapeButtons = document.querySelectorAll('.sidebar-nav .nav-item[data-shape]')
 
 shapeButtons.forEach(btn => {
@@ -44,10 +42,8 @@ function activateText(): void {
   morphTo('text')
 }
 
-// Click the header to activate
 textHeaderEl?.addEventListener('click', activateText)
 
-// Live update on every keystroke (twitch included, you said that's fine)
 textInput?.addEventListener('input', () => {
   updateText(textInput.value.trim() || 'XEE')
   shapeButtons.forEach(b => b.classList.remove('active'))
@@ -65,7 +61,6 @@ shapeButtons.forEach(btn => {
   btn.addEventListener('click', () => textGroupEl?.classList.remove('active'))
 })
 
-// — Theme Toggling ———————————————————————————————————————————
 const btnEnterPlanets = document.getElementById('btn-enter-planets') as HTMLElement
 const btnExitPlanets = document.getElementById('btn-exit-planets') as HTMLElement
 
@@ -90,7 +85,6 @@ btnExitPlanets.addEventListener('click', () => {
   morphTo(shape || 'sphere')
 })
 
-// Wire planet dropdown -> morph + HUD
 const planetButtons = document.querySelectorAll('.planet-nav-item')
 planetButtons.forEach(btn => {
   btn.addEventListener('click', (e) => {
@@ -105,24 +99,19 @@ planetButtons.forEach(btn => {
   })
 })
 
-// — Render loop ————————————————————————————————————————————————
+//Render loop
 function animate(time: number = 0): void {
   requestAnimationFrame(animate)
 
-  // Convert the milliseconds timestamp into seconds for smooth, frame-independent animation
   const t = time * 0.001
 
-  // Update controls (inertia, auto-spin, zoom easing)
   tickControls()
 
-  // Apply rotation + sway to the group
   group.rotation.x = state.rotX + (group.userData.swayX || 0)
   group.rotation.y = state.rotY + (group.userData.swayY || 0)
 
-  // Apply smooth zoom to camera
   camera.position.z = state.zoom
 
-  // Update particles (morphing, repulsion, spring physics)
   tickParticles(t, state.mouse.x, state.mouse.y, state.isDrag)
 
   // Render the scene
