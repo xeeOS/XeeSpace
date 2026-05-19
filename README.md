@@ -49,7 +49,7 @@ A web application that transforms mathematical geometries into fluid, particle a
 
 ```bash
 # Clone the repository
-git clone [https://github.com/xeeOS/xeeSpace.git](https://github.com/xeeOS/xeeSpace.git)
+git clone https://github.com/xeeOS/xeeSpace.git
 cd xeeSpace
 
 # Install dependencies
