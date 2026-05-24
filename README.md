@@ -42,7 +42,7 @@ A web application that transforms mathematical geometries into fluid, particle a
 
 ## Tech Stack
 * **Frontend:** TypeScript, HTML5, CSS3
-* **3D Graphics:** Three.js, Custom Math Utilities
+* **3D Graphics:** Three.js
 * **UI & Build:** Tailwind CSS, Vite
 
 ## Quick Start
