@@ -20,7 +20,7 @@ A web application that transforms mathematical geometries into fluid, particle a
 * **Volumetric Rendering:** Animates thousands of particles with fluid, spring-bounce morphing using kinetic velocity arrays.
 * **Multiple Geometries:** Instantly morph between Sphere, Cube, Galaxy, DNA, Torus, Heart, and custom 3D Text.
 * **Interactive Modes:** Switch between the default Sandbox playground and an interactive Planets Mode.
-* **State-Driven UI:** Responsive sidebar navigation with theme toggling.
+* **UI:** Responsive sidebar navigation with theme toggling.
 
 ## Screenshots
 
